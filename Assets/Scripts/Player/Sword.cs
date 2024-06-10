@@ -47,8 +47,6 @@ public class Sword : MonoBehaviour
         playerControls.Combat.Attack.started += _ => StartAttacking();
         playerControls.Combat.Attack.canceled += _ => StopAttacking();
         attackCooldown = 0f;
-
-        
     }
 
     private void Update()
@@ -64,7 +62,7 @@ public class Sword : MonoBehaviour
 
     private void StartAttacking()
     {
-        if (attackCoroutine == null)
+        if (attackCoroutine == null && playerController.canAttack)
         {
             attackCoroutine = StartCoroutine(AttackRoutine());
         }

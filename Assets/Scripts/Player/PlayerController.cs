@@ -19,6 +19,8 @@ public class PlayerController : Singleton<PlayerController>
     private PlayerControls playerControls;
     TrailRenderer trailRenderer;
 
+    public bool canAttack = true;
+
     public float damage = 20;
 
     public bool FacingLeft { get { return facingleft; } set { facingleft = value; } }
