@@ -29,13 +29,27 @@ public class Inventory
             return currentCount < maxCount; 
         }
 
-        public void AddItem(CollectableItems item)
+        public void AddItemSlot(CollectableItems item)
         {
             this.collectableType = item.type;
             this.icon = item.icon;
             currentCount++;
         }
-    } 
+
+        public void RemoveItemSlot()
+        {
+            if (currentCount > 0 )
+            {
+                currentCount--;
+            }
+
+            if (currentCount == 0 )
+            {
+                this.icon = null;
+                this.collectableType = CollectableType.NONE;
+            }
+        }
+    }  
 
     public List<Slot> slots = new List<Slot>();
 
@@ -48,22 +62,27 @@ public class Inventory
         }
     }
 
-    public void AddItem(CollectableItems item)
+    public void AddItemInventory(CollectableItems item)
     {
         foreach (Slot slot in slots)
         {
             if (slot.collectableType == item.type && slot.AddAble())
             {
-                slot.AddItem(item);
+                slot.AddItemSlot(item);
                 return;
             }
 
             if (slot.collectableType == CollectableType.NONE)
             {
-                slot.AddItem(item);
+                slot.AddItemSlot(item);
                 return;
             }
         }
+    }
+
+    public void RemoveItemInventory(int index)
+    {
+        slots[index].RemoveItemSlot();
     }
 
 }

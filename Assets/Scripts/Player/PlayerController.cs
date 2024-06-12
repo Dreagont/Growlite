@@ -62,6 +62,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         playerRoll();
         PlayerInput();
+        playerPlow();
     }
 
     private void FixedUpdate()
@@ -124,8 +125,18 @@ public class PlayerController : Singleton<PlayerController>
 
         
     }
-
-
+    void playerPlow()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Vector3Int position = new Vector3Int((int)transform.position.x, (int)transform.position.y, 0);
+            Debug.Log(position);
+            if (GameManager.Instance.TileManager.IsInteractable(position))
+            {
+                GameManager.Instance.TileManager.SetInteracted(position);
+            }
+        }
+    }
     void playerRoll()
     {
         if (rollTime > 0)

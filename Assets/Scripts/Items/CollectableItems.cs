@@ -15,7 +15,7 @@ public class CollectableItems : MonoBehaviour
 
         if (player != null )
         {
-            player.inventory.AddItem(this);
+            player.inventory.AddItemInventory(this);
             Destroy(gameObject);
         }
     }

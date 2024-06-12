@@ -8,6 +8,11 @@ public class Inventory_UI : MonoBehaviour
 
     public GameObject toolBar;
 
+    public GameObject playerEquipment;
+
+    public GameObject playerStats;
+
+
     public Player player;
 
     PlayerController playerController;
@@ -33,17 +38,21 @@ public class Inventory_UI : MonoBehaviour
             inventoryPanel.SetActive(true);
             playerController.canAttack = false;
             toolBar.SetActive(false);
-            Setup();
+            playerEquipment.SetActive(true);
+            playerStats.SetActive(true);
+            Refresh();
         }
         else
         {
             inventoryPanel.SetActive(false);
             playerController.canAttack = true;
+            playerEquipment.SetActive(false);
+            playerStats.SetActive(false);
             toolBar.SetActive(true);
         }
     }
 
-    public void Setup()
+    public void Refresh()
     {
         if (slots.Count == player.inventory.slots.Count) {
             for (int i = 0; i < slots.Count; i++)
@@ -58,5 +67,18 @@ public class Inventory_UI : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Remove(int index)
+    {
+        CollectableItems dropItem = GameManager.Instance.ItemManager.GetItemByType(player.inventory.slots[index].collectableType);
+
+        if ( dropItem != null)
+        {
+            player.DropItem(dropItem);
+            player.inventory.RemoveItemInventory(index);
+            Refresh();
+        }
+        
     }
 }

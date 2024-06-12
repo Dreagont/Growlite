@@ -6522,6 +6522,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 32, y: 0, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 654
+      m_TileSpriteIndex: 654
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 6, y: 4, z: 0}
     second:
       serializedVersion: 2
@@ -7892,6 +7902,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: d880d2e11aa8ff743a93f65681fbdc42, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 4dbcf6c80927efa4380d69c50d3ad4f4, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 478ff37e52c0f5749961591cb694b227, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 1
     m_Data: {fileID: 32189934, guid: 91c568a5afba0d44fb147ddf299caa3e, type: 3}
@@ -9201,8 +9213,10 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: e2024416974b9994a935e781df3d89cb, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: b27d6a773262a004b8c101d80429082d, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: -82909342, guid: 9470b17ec078762449d7fbcec5647f51, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 654
+  - m_RefCount: 655
     m_Data:
       e00: 1
       e01: 0
@@ -9221,13 +9235,13 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 654
+  - m_RefCount: 655
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -2, y: -33, z: 0}
-  m_Size: {x: 31, y: 40, z: 1}
+  m_Size: {x: 35, y: 40, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -9341,7 +9355,7 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &3699350017037696738
+--- !u!114 &4940028754572435350
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
