@@ -62,7 +62,7 @@ public class Sword : MonoBehaviour
 
     private void StartAttacking()
     {
-        if (attackCoroutine == null && playerController.canAttack)
+        if (attackCoroutine == null && playerController.canAction)
         {
             attackCoroutine = StartCoroutine(AttackRoutine());
         }

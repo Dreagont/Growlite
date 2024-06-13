@@ -12,13 +12,21 @@ public class Player : MonoBehaviour
         inventory = new Inventory(10);
     }
 
-    public void DropItem(CollectableItems item)
+    public void DropItem(Item item)
     {
         Vector2 dropLocation = transform.position;
 
         Vector2 spawnOffset = Random.insideUnitCircle * 1.5f;
 
         Instantiate(item, dropLocation + spawnOffset, Quaternion.identity);
+    }
+
+    public void DropItem(Item item, int quantity)
+    {
+        for (int i = 0; i < quantity; i++)
+        {
+            DropItem(item);
+        }
     }
     void Start()
     {

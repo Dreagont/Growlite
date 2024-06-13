@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1646642717550137639}
   - component: {fileID: 7510514300636867340}
   - component: {fileID: 1083567013713863898}
+  - component: {fileID: 3671089499004257955}
+  - component: {fileID: 2207073465156075045}
   m_Layer: 0
   m_Name: Corn seed
   m_TagString: Untagged
@@ -143,6 +145,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb0fe710a610854d9c9b3f3016bd5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
-  QUANTITY: 1
-  icon: {fileID: -1796600918, guid: 9470b17ec078762449d7fbcec5647f51, type: 3}
+--- !u!50 &3671089499004257955
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503951528582907752}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &2207073465156075045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503951528582907752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3c14a488e493f469075e8c2aa7d1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: e5d39220da6fc1746b6221929f8813ee, type: 2}
+  rb: {fileID: 0}

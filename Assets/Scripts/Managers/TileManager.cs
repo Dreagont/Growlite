@@ -5,14 +5,30 @@ using UnityEngine.Tilemaps;
 
 public class TileManager : MonoBehaviour
 {
-    [SerializeField] private Tilemap interactAbleTile;
+    [SerializeField] public Tilemap interactAbleTile;
+
+    [SerializeField] private Tilemap HightLightTile;
+
+    [SerializeField] private GameObject HightLightTileObject;
+
+    [SerializeField] private GameObject interactAbleTileObject;
 
     [SerializeField] private Tile hiddenTile;
 
     [SerializeField] private Tile interactedTile;
 
+    [SerializeField] private Tile highlightTile;
+
+    private Vector3Int previousHighlightedCell;
+
+    [SerializeField] private GameObject player;
+
+
     void Start()
     {
+        HightLightTileObject.SetActive(true);
+        interactAbleTileObject.SetActive(true);
+        
         foreach(var position in interactAbleTile.cellBounds.allPositionsWithin)
         {
             if (interactAbleTile.HasTile(position))
@@ -20,12 +36,48 @@ public class TileManager : MonoBehaviour
                 interactAbleTile.SetTile(position, hiddenTile);
             }
         }
+
+        foreach (var position in HightLightTile.cellBounds.allPositionsWithin)
+        {
+            if (HightLightTile.HasTile(position))
+            {
+                HightLightTile.SetTile(position, hiddenTile);
+            }
+        }
+
+        previousHighlightedCell = new Vector3Int(-1, -1, -1);
+
     }
 
     void Update()
     {
-        
+        HighlightTileUnderMouse();
     }
+
+    private void HighlightTileUnderMouse()
+    {
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3Int cellPosition = HightLightTile.WorldToCell(mouseWorldPos);
+
+        cellPosition.z = 0;
+
+        Vector3 playerPosition = new Vector3Int((int)player.transform.position.x, (int)player.transform.position.y, 0);
+
+        float distance = Vector3.Distance(playerPosition, cellPosition);
+
+        if (cellPosition != previousHighlightedCell && distance <= 5f)
+        {
+            HightLightTile.SetTile(previousHighlightedCell, null); 
+            previousHighlightedCell = cellPosition;
+            HightLightTile.SetTile(cellPosition, highlightTile); 
+        }
+
+        if (distance >5f)
+        {
+            HightLightTile.SetTile(previousHighlightedCell, hiddenTile);
+        }
+    }
+
 
     public bool IsInteractable(Vector3Int position)
     {
@@ -42,7 +94,11 @@ public class TileManager : MonoBehaviour
 
     public void SetInteracted(Vector3Int position)
     {
-        Vector3Int newPos = new Vector3Int(position.x-1,position.y -1, position.z);
-        interactAbleTile.SetTile(newPos, interactedTile);
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3Int cellPosition = interactAbleTile.WorldToCell(mouseWorldPos);
+
+        interactAbleTile.SetTile(cellPosition, interactedTile);
+
+        
     }
 }

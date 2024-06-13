@@ -19,7 +19,7 @@ public class PlayerController : Singleton<PlayerController>
     private PlayerControls playerControls;
     TrailRenderer trailRenderer;
 
-    public bool canAttack = true;
+    public bool canAction = true;
 
     public float damage = 20;
 
@@ -127,13 +127,23 @@ public class PlayerController : Singleton<PlayerController>
     }
     void playerPlow()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetMouseButton(0) && canAction)
         {
-            Vector3Int position = new Vector3Int((int)transform.position.x, (int)transform.position.y, 0);
-            Debug.Log(position);
-            if (GameManager.Instance.TileManager.IsInteractable(position))
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int cellPosition = GameManager.Instance.TileManager.interactAbleTile.WorldToCell(mouseWorldPos);
+
+            cellPosition.z = 0;
+
+            Vector3 playerPosition = new Vector3Int((int)transform.position.x, (int)transform.position.y, 0);
+
+            float distance = Vector3.Distance(playerPosition, cellPosition);
+
+            if (distance <= 5f && GameManager.Instance.TileManager.IsInteractable(cellPosition))
             {
-                GameManager.Instance.TileManager.SetInteracted(position);
+                GameManager.Instance.TileManager.SetInteracted(cellPosition);
+            } else
+            {
+                Debug.Log("Position too far or not interactable");
             }
         }
     }

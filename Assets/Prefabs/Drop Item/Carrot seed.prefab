@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8863525777861005620}
   - component: {fileID: 2334204773579295677}
   - component: {fileID: 3300246862277989493}
+  - component: {fileID: 7706307615333213769}
+  - component: {fileID: 3994905085384575598}
   m_Layer: 0
   m_Name: Carrot seed
   m_TagString: Untagged
@@ -143,6 +145,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb0fe710a610854d9c9b3f3016bd5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  QUANTITY: 1
-  icon: {fileID: -284421406, guid: 9470b17ec078762449d7fbcec5647f51, type: 3}
+--- !u!50 &7706307615333213769
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2566325713926504272}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &3994905085384575598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2566325713926504272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3c14a488e493f469075e8c2aa7d1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 0c01530e2939bd74fbb3a72e07d83528, type: 2}
+  rb: {fileID: 0}

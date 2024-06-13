@@ -11,13 +11,13 @@ public class Inventory
         public int currentCount;
         public int maxCount;
         public int slotIndex;
-        public CollectableType collectableType;
+        public string itemName;
 
         public Sprite icon;
 
         public Slot()
         {
-            collectableType = CollectableType.NONE;
+            itemName = "";
 
             currentCount = 0;
 
@@ -29,10 +29,10 @@ public class Inventory
             return currentCount < maxCount; 
         }
 
-        public void AddItemSlot(CollectableItems item)
+        public void AddItemSlot(Item item)
         {
-            this.collectableType = item.type;
-            this.icon = item.icon;
+            this.itemName = item.itemData.itemName;
+            this.icon = item.itemData.icon;
             currentCount++;
         }
 
@@ -46,7 +46,7 @@ public class Inventory
             if (currentCount == 0 )
             {
                 this.icon = null;
-                this.collectableType = CollectableType.NONE;
+                this.itemName = "";
             }
         }
     }  
@@ -62,17 +62,17 @@ public class Inventory
         }
     }
 
-    public void AddItemInventory(CollectableItems item)
+    public void AddItemInventory(Item item)
     {
         foreach (Slot slot in slots)
         {
-            if (slot.collectableType == item.type && slot.AddAble())
+            if (slot.itemName == item.itemData.itemName && slot.AddAble())
             {
                 slot.AddItemSlot(item);
                 return;
             }
 
-            if (slot.collectableType == CollectableType.NONE)
+            if (slot.itemName == "")
             {
                 slot.AddItemSlot(item);
                 return;
@@ -84,5 +84,11 @@ public class Inventory
     {
         slots[index].RemoveItemSlot();
     }
-
+    public void RemoveItemInventory(int index, int quantity)
+    {
+        for (int i = 0; i< quantity; i++)
+        {
+            RemoveItemInventory(index);
+        }
+    }
 }
