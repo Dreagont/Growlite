@@ -15,6 +15,15 @@ public class Inventory
 
         public Sprite icon;
 
+        public Slot(int currentCount, int maxCount, int slotIndex, string itemName, Sprite icon)
+        {
+            this.currentCount = currentCount;
+            this.maxCount = maxCount;
+            this.slotIndex = slotIndex;
+            this.itemName = itemName;
+            this.icon = icon;
+        }
+
         public Slot()
         {
             itemName = "";
@@ -24,9 +33,24 @@ public class Inventory
             maxCount = 100;
         }
 
-        public bool AddAble()
+        public bool IsEmpty()
         {
-            return currentCount < maxCount; 
+           
+                if (itemName == "" && currentCount ==0)
+                {
+                    return true;
+                }
+                return false;
+            
+        }
+
+        public bool AddAble(string itemName)
+        {
+            if (this.itemName == itemName && currentCount < maxCount)
+            {
+                return true ;
+            }
+            return false ;
         }
 
         public void AddItemSlot(Item item)
@@ -34,6 +58,14 @@ public class Inventory
             this.itemName = item.itemData.itemName;
             this.icon = item.itemData.icon;
             currentCount++;
+        }
+
+        public void AddItemSlot(string itemName, Sprite icon, int maxCount)
+        {
+            this.itemName = itemName;
+            this.icon = icon;
+            currentCount++;
+            this.maxCount = maxCount;
         }
 
         public void RemoveItemSlot()
@@ -53,6 +85,7 @@ public class Inventory
 
     public List<Slot> slots = new List<Slot>();
 
+    public Slot selectedSlot = null;
     public Inventory(int numSlot)
     {
         for (int i = 0; i < numSlot; i++)
@@ -66,7 +99,7 @@ public class Inventory
     {
         foreach (Slot slot in slots)
         {
-            if (slot.itemName == item.itemData.itemName && slot.AddAble())
+            if (slot.itemName == item.itemData.itemName && slot.AddAble(item.itemData.itemName))
             {
                 slot.AddItemSlot(item);
                 return;
@@ -89,6 +122,26 @@ public class Inventory
         for (int i = 0; i< quantity; i++)
         {
             RemoveItemInventory(index);
+        }
+    }
+
+    public void MoveSlot(int from, int to, Inventory toInventory)
+    {
+        Slot fromSlot = slots[from];
+        Slot toSlot = toInventory.slots[to];
+
+        if (toSlot.IsEmpty() || toSlot.AddAble(fromSlot.itemName)) 
+        {
+            toSlot.AddItemSlot(fromSlot.itemName, fromSlot.icon, fromSlot.maxCount);
+            fromSlot.RemoveItemSlot();
+        }
+    }
+
+    public void SelectSlot(int index)
+    {
+        if (slots !=  null && slots.Count > 0)
+        {
+            selectedSlot = slots[index];
         }
     }
 }

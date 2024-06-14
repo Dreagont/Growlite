@@ -18,7 +18,7 @@ public class PlayerController : Singleton<PlayerController>
     private Vector2 movement;
     private PlayerControls playerControls;
     TrailRenderer trailRenderer;
-
+    private TileManager tileManager;
     public bool canAction = true;
 
     public float damage = 20;
@@ -54,6 +54,8 @@ public class PlayerController : Singleton<PlayerController>
     {
         trailRenderer = GetComponent<TrailRenderer>();
         animator = GetComponent<Animator>();
+        tileManager = GameManager.Instance.TileManager;
+
         FacingDown = false;
         FacingUp = false;
     }
@@ -138,7 +140,14 @@ public class PlayerController : Singleton<PlayerController>
 
             float distance = Vector3.Distance(playerPosition, cellPosition);
 
-            if (distance <= 5f && GameManager.Instance.TileManager.IsInteractable(cellPosition))
+            string tileName = tileManager.GetTileName(cellPosition);
+
+            if (!string.IsNullOrWhiteSpace(tileName))
+            {
+
+            }
+
+            if (distance <= 5f && GameManager.Instance.TileManager.IsInteractable(cellPosition) && GameManager.Instance.player.inventory.toolBar.selectedSlot.itemName == "Copper Hoe")
             {
                 GameManager.Instance.TileManager.SetInteracted(cellPosition);
             } else

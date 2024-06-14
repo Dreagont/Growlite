@@ -28,7 +28,8 @@ public class ToolBar_UI : MonoBehaviour
             }
             selectedSlot = toolBarSlots[index];
             selectedSlot.SetHightLight(true);
-            Debug.Log(toolBarSlots[index]);
+
+            GameManager.Instance.player.inventory.toolBar.SelectSlot(index);
         }
     }
     private void CheckNumKey()

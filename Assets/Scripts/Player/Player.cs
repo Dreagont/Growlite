@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     
-    public Inventory inventory;
+    public InventoryManager inventory;
+
+    private TileManager tileManager;
 
     private void Awake()
     {
-        inventory = new Inventory(10);
+        inventory = GetComponent<InventoryManager>();
     }
 
     public void DropItem(Item item)
@@ -30,7 +33,6 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
-        
     }
 
     void Update()

@@ -98,7 +98,16 @@ public class TileManager : MonoBehaviour
         Vector3Int cellPosition = interactAbleTile.WorldToCell(mouseWorldPos);
 
         interactAbleTile.SetTile(cellPosition, interactedTile);
+    }
 
-        
+    public string GetTileName(Vector3Int position)
+    {
+        if (interactAbleTile != null)
+        {
+            TileBase tile = interactAbleTile.GetTile(position);
+
+            if (tile != null) { return tile.name; }
+        }
+        return "";
     }
 }

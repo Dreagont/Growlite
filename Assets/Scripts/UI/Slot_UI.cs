@@ -7,8 +7,12 @@ using UnityEngine.UI;
 public class Slot_UI : MonoBehaviour
 {
     public Image itemIcon;
+
     public TextMeshProUGUI itemQuantityText;
+
     public int slotId;
+
+    public Inventory inventory;
 
     [SerializeField] private GameObject highLightItem;
     public void SetItem(Inventory.Slot slot)

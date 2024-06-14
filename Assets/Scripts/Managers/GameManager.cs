@@ -5,7 +5,12 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public ItemManager ItemManager;
+
     public TileManager TileManager;
+
+    public UIManager UIManager;
+
+    public Player player;
     void Start()
     {
         
@@ -16,7 +21,9 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         ItemManager = GetComponent<ItemManager>();
         TileManager = GetComponent<TileManager>();
+        UIManager = GetComponent<UIManager>();
         DontDestroyOnLoad(gameObject);
+        player = FindAnyObjectByType<Player>();
     }
 
     // Update is called once per frame
