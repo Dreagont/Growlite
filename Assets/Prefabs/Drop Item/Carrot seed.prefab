@@ -145,6 +145,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb0fe710a610854d9c9b3f3016bd5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  speed: 5
+  pickupDistance: 1.5
+  ttl: 10
 --- !u!50 &7706307615333213769
 Rigidbody2D:
   serializedVersion: 4
@@ -171,7 +175,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &3994905085384575598
 MonoBehaviour:
   m_ObjectHideFlags: 0

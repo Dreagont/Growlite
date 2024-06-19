@@ -10,7 +10,7 @@ public class GameManager : Singleton<GameManager>
 
     public UIManager UIManager;
 
-    public Player player;
+    public PlayerController player;
     void Start()
     {
         
@@ -23,7 +23,7 @@ public class GameManager : Singleton<GameManager>
         TileManager = GetComponent<TileManager>();
         UIManager = GetComponent<UIManager>();
         DontDestroyOnLoad(gameObject);
-        player = FindAnyObjectByType<Player>();
+        player = FindAnyObjectByType<PlayerController>();
     }
 
     // Update is called once per frame

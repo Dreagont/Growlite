@@ -7,7 +7,7 @@ public class TileManager : MonoBehaviour
 {
     [SerializeField] public Tilemap interactAbleTile;
 
-    [SerializeField] private Tilemap HightLightTile;
+    [SerializeField] public Tilemap HightLightTile;
 
     [SerializeField] private GameObject HightLightTileObject;
 
@@ -56,27 +56,37 @@ public class TileManager : MonoBehaviour
 
     private void HighlightTileUnderMouse()
     {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3Int cellPosition = HightLightTile.WorldToCell(mouseWorldPos);
-
-        cellPosition.z = 0;
-
-        Vector3 playerPosition = new Vector3Int((int)player.transform.position.x, (int)player.transform.position.y, 0);
-
-        float distance = Vector3.Distance(playerPosition, cellPosition);
-
-        if (cellPosition != previousHighlightedCell && distance <= 5f)
+        if (GameManager.Instance.player.inventory.toolBar.selectedSlot.itemName == "Copper Hoe")
         {
-            HightLightTile.SetTile(previousHighlightedCell, null); 
-            previousHighlightedCell = cellPosition;
-            HightLightTile.SetTile(cellPosition, highlightTile); 
-        }
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (distance >5f)
+            Vector3Int cellPosition = HightLightTile.WorldToCell(mouseWorldPos);
+            cellPosition.z = 0;
+
+            Vector3Int playerCellPosition = HightLightTile.WorldToCell(player.transform.position);
+            playerCellPosition.z = 0;
+
+            float distance = Vector3Int.Distance(playerCellPosition, cellPosition);
+
+            if (cellPosition != previousHighlightedCell && distance <= 3f)
+            {
+                HightLightTile.SetTile(previousHighlightedCell, null);
+
+                previousHighlightedCell = cellPosition;
+
+                HightLightTile.SetTile(cellPosition, highlightTile);
+            }
+
+            if (distance > 3f)
+            {
+                HightLightTile.SetTile(previousHighlightedCell, hiddenTile);
+            }
+        } else
         {
             HightLightTile.SetTile(previousHighlightedCell, hiddenTile);
         }
     }
+
 
 
     public bool IsInteractable(Vector3Int position)

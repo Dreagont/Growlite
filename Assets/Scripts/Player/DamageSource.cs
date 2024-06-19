@@ -5,15 +5,15 @@ using UnityEngine;
 public class DamageSource : MonoBehaviour
 {
     [SerializeField] private float damageAmount;
-    private PlayerController playerController;
+    private Player player;
 
     private void Start()
     {
-        playerController = GetComponentInParent<PlayerController>();
+        player = GetComponentInParent<Player>();
 
-        if (playerController != null)
+        if (player != null)
         {
-            damageAmount = playerController.damage;
+            damageAmount = player.Damage;
         }
         else
         {

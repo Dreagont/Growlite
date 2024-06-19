@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Inventory_UI : MonoBehaviour
 {
-    public Player player;
+    public PlayerController player;
 
     public string inventoryName;
 

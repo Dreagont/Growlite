@@ -6,4 +6,6 @@ public class ItemData : ScriptableObject
 {
     public string itemName = "Item Name";
     public Sprite icon;
+    public bool stackAble = true;
+    public int quantity = 1;
 }
