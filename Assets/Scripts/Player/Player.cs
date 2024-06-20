@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] public int Health = 100;
+    [SerializeField] public int Health = 200;
     [SerializeField] public int Damage  = 30;
     [SerializeField] public float movementSpeed = 5f;
     private void Awake()

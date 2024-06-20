@@ -75,6 +75,8 @@ public class PlayerController : Singleton<PlayerController>
         attackAreaScript = attackArea.GetComponent<AttackArea>();
         attackArea.SetActive(false);
         player = GetComponent<Player>();
+        moveSpeed = player.movementSpeed;
+
 
     }
     void attack()
@@ -117,7 +119,6 @@ public class PlayerController : Singleton<PlayerController>
         playerPlow();
         attack();
 
-        moveSpeed = player.movementSpeed;
 
     }
 
@@ -249,7 +250,7 @@ public class PlayerController : Singleton<PlayerController>
 
         if (rollTime <= 0 && isRolling)
         {
-            moveSpeed = 5f;
+            moveSpeed = player.movementSpeed;
             isRolling = false;
         }
     }

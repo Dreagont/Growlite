@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -12,13 +11,28 @@ public class PlayerStats : MonoBehaviour
     public TMP_Text popupText;
 
     private bool isImmune = false;
-    public float immunityDuration = 0.5f; 
+    public float immunityDuration = 0.5f;
+
+    public PlayerHealthUI healthUI;
 
     void Start()
     {
         player = GetComponent<Player>();
+
+        if (healthUI == null)
+        {
+            healthUI = GetComponent<PlayerHealthUI>();
+        }
+
+        if (healthUI == null)
+        {
+            Debug.LogError("PlayerHealthUI component is not assigned or found!");
+            return;
+        }
+
         maxHealth = player.Health;
         currentHealth = maxHealth;
+        healthUI.updateBar(currentHealth, maxHealth);
     }
 
     void Update()
@@ -39,19 +53,20 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (isImmune) return; 
+        if (isImmune) return;
 
         RectTransform textTramform = Instantiate(damageText).GetComponent<RectTransform>();
         textTramform.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
 
         popupText.text = damage.ToString();
 
-        Canvas canvas = GameObject.FindAnyObjectByType<Canvas>();
+        Canvas canvas = GameObject.FindObjectOfType<Canvas>();
         textTramform.SetParent(canvas.transform);
 
         currentHealth -= damage;
+        healthUI.updateBar(currentHealth, maxHealth); 
 
-        StartCoroutine(ImmuneCoroutine()); 
+        StartCoroutine(ImmuneCoroutine());
     }
 
     private IEnumerator ImmuneCoroutine()
