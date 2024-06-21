@@ -3,7 +3,7 @@ guid: 6d663cde7cc1e1345be2c7daf3f43d3d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -908,7 +908,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Water Effect and Bullet 16x16_38
+      name: Enemy Shoot
       rect:
         serializedVersion: 2
         x: 160
@@ -7827,6 +7827,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Enemy Shoot: -591879012
       Water Effect and Bullet 16x16_0: 1535972279
       Water Effect and Bullet 16x16_1: -1332265370
       Water Effect and Bullet 16x16_10: -1396047449
@@ -8129,7 +8130,6 @@ TextureImporter:
       Water Effect and Bullet 16x16_368: 889781930
       Water Effect and Bullet 16x16_369: 310899158
       Water Effect and Bullet 16x16_37: 620697206
-      Water Effect and Bullet 16x16_38: -591879012
       Water Effect and Bullet 16x16_39: 568332924
       Water Effect and Bullet 16x16_4: 1014495571
       Water Effect and Bullet 16x16_40: -1737708638

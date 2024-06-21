@@ -6,7 +6,7 @@ public class PlayerStats : MonoBehaviour
 {
     private Player player;
     private int maxHealth;
-    private int currentHealth;
+    [SerializeField] private int currentHealth;
     public GameObject damageText;
     public TMP_Text popupText;
 
@@ -44,6 +44,7 @@ public class PlayerStats : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         EnemyAI enemy = collision.gameObject.GetComponent<EnemyAI>();
+       
 
         if (enemy != null)
         {

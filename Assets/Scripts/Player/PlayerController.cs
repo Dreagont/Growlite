@@ -8,7 +8,7 @@ public class PlayerController : Singleton<PlayerController>
 {
     public float moveSpeed;
 
-    public float rollSpeed = 10f;  
+    public float rollSpeed = 10f;
 
     private Rigidbody2D rb;
 
@@ -46,7 +46,13 @@ public class PlayerController : Singleton<PlayerController>
 
     public InventoryManager inventory;
 
+    public bool isShootting = false;
+
     private Player player;
+
+    private float bowAttackTime;
+    public float bowAttackDuration;
+    bool isBowAttacking = false;
 
     public bool FacingLeft { get { return facingleft; } set { facingleft = value; } }
 
@@ -55,7 +61,7 @@ public class PlayerController : Singleton<PlayerController>
     protected override void Awake()
     {
         base.Awake();
-        playerControls =  new PlayerControls();
+        playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
         inventory = GetComponent<InventoryManager>();
         DontDestroyOnLoad(gameObject);
@@ -76,20 +82,20 @@ public class PlayerController : Singleton<PlayerController>
         attackArea.SetActive(false);
         player = GetComponent<Player>();
         moveSpeed = player.movementSpeed;
-
-
     }
-    void attack()
+    void playerAttack()
     {
         if (Input.GetMouseButton(0) && canAction && GameManager.Instance.player.inventory.toolBar.selectedSlot.itemName == "Sword")
         {
+            isShootting = false;
+
             if (!isAttacking)
             {
                 isAttacking = true;
                 attackTime = attackDuration;
                 animator.SetTrigger("Attack");
-                
-                
+
+
             }
             else
             {
@@ -117,8 +123,8 @@ public class PlayerController : Singleton<PlayerController>
         playerRoll();
         PlayerInput();
         playerPlow();
-        attack();
-
+        playerAttack();
+        playerBow();
 
     }
 
@@ -130,7 +136,7 @@ public class PlayerController : Singleton<PlayerController>
     private void PlayerInput()
     {
         movement = playerControls.Movement.Move.ReadValue<Vector2>();
-        
+
     }
 
     void Move()
@@ -141,36 +147,23 @@ public class PlayerController : Singleton<PlayerController>
         if (mousePos.x < playerScreenPoint.x)
         {
             FacingLeft = true;
-        } else
+        }
+        else
         {
             FacingLeft = false;
         }
-        
+
 
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.deltaTime));
         if (movement.x != 0 || movement.y != 0)
         {
-            if (movement.y != 0)
-            {
-                animator.SetFloat("X", movement.x);
 
-                animator.SetFloat("Y", movement.y);
 
-            } else
-            {
+            animator.SetFloat("X", movement.x);
 
-                if (FacingLeft)
-                {
-                    animator.SetFloat("Y", movement.y);
-                    animator.SetFloat("X", -1);
-                }
-                else
-                {
-                    animator.SetFloat("Y", movement.y);
-                    animator.SetFloat("X", 1);
+            animator.SetFloat("Y", movement.y);
 
-                }
-            }
+
 
             if (movement.x > 0)
             {
@@ -199,8 +192,41 @@ public class PlayerController : Singleton<PlayerController>
             animator.SetBool("isWalking", false);
         }
 
-        
+
     }
+
+    void playerBow()
+    {
+        if (Input.GetMouseButton(0) && canAction && GameManager.Instance.player.inventory.toolBar.selectedSlot.itemName == "Bow")
+        {
+            if (!isBowAttacking)
+            {
+                isBowAttacking = true;
+                bowAttackTime = bowAttackDuration;
+                animator.SetTrigger("BowAttack");
+            }
+        }
+
+        if (isBowAttacking)
+        {
+            bowAttackTime -= Time.deltaTime;
+            if (bowAttackTime <= 0)
+            {
+                isBowAttacking = false;
+                attackArea.SetActive(false);
+                isShootting = false;
+            }
+        }
+
+    }
+
+    void shootArrow()
+    {
+        isShootting = true;
+        attackArea.SetActive(true);
+        attackAreaScript.ShootArrow();
+    }
+
     void playerPlow()
     {
         if (Input.GetMouseButton(0) && canAction && GameManager.Instance.player.inventory.toolBar.selectedSlot.itemName == "Copper Hoe")

@@ -4,19 +4,21 @@ using UnityEngine;
 public class AttackArea : MonoBehaviour
 {
     private float damageAmount;
-    private Player playerController;
+    private Player player;
+    private PlayerController playerController;
 
 
     private void Start()
     {
-        playerController = GetComponentInParent<Player>();
+        player = GetComponentInParent<Player>();
+        playerController = GetComponentInParent<PlayerController>();
     }
 
     private void Update()
     {
-        if (playerController != null)
+        if (player != null)
         {
-            damageAmount = playerController.Damage;
+            damageAmount = player.Damage;
         }
         else
         {
@@ -26,17 +28,21 @@ public class AttackArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger Entered by: " + collision.name);
-        if (collision.GetComponent<DamageAbleEnemy>() != null )
+        if (!playerController.isShootting)
         {
-            DamageAbleEnemy enemy = collision.GetComponent<DamageAbleEnemy>();
-            enemy.TakeDamage(damageAmount);
+            Debug.Log("Trigger Entered by: " + collision.name);
+            if (collision.GetComponent<DamageAbleEnemy>() != null)
+            {
+                DamageAbleEnemy enemy = collision.GetComponent<DamageAbleEnemy>();
+                enemy.TakeDamage(damageAmount);
+            }
+            if (collision.GetComponent<Minerals>() != null)
+            {
+                Minerals minerals = collision.GetComponent<Minerals>();
+                minerals.Hit(1);
+            }
         }
-        if (collision.GetComponent<Minerals>() != null )
-        {
-            Minerals minerals = collision.GetComponent<Minerals>();
-            minerals.Hit(1);
-        }
+        
     }
 
     public void SetFacingDirection(int direction)
@@ -56,5 +62,13 @@ public class AttackArea : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, 270);
                 break;
         }
+    }
+
+    [SerializeField] private GameObject arrowPrefab;
+    [SerializeField] private Transform arrowSpawnPoint;
+
+    public void ShootArrow()
+    {
+        Instantiate(arrowPrefab, arrowSpawnPoint.position, transform.rotation);
     }
 }
