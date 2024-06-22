@@ -42,6 +42,14 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E)) {
             ToggleInventoryUI();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            inventoryPanel.SetActive(false);
+            playerController.canAction = true;
+            inventoryOuter.SetActive(false);
+            playerEquipment.SetActive(false);
+            playerStats.SetActive(false);
+        }
     }
 
     public void ToggleInventoryUI()

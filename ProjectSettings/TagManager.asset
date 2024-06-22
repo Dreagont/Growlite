@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Canvas
+  - Interactable
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -12,7 +14,7 @@ TagManager:
   - Camera
   - Water
   - UI
-  - 
+  - Interactable
   - 
   - 
   - 
