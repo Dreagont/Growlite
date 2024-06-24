@@ -14587,7 +14587,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons & Icons_690
+      name: BuyIcon
       rect:
         serializedVersion: 2
         x: 112
@@ -38043,7 +38043,6 @@ TextureImporter:
       Buttons & Icons_688: 1726850627
       Buttons & Icons_689: 750828534
       Buttons & Icons_69: 1329753067
-      Buttons & Icons_690: 1783420289
       Buttons & Icons_691: 1948756444
       Buttons & Icons_692: -933094294
       Buttons & Icons_693: -571268908
@@ -38386,6 +38385,7 @@ TextureImporter:
       Buttons & Icons_997: 966464448
       Buttons & Icons_998: -164491346
       Buttons & Icons_999: -453692104
+      BuyIcon: 1783420289
       highlight_arrow: 479260332
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

@@ -11,6 +11,8 @@ public class GameManager : Singleton<GameManager>
     public UIManager UIManager;
 
     public PlayerController player;
+
+    public CurrencyManager currency;
     void Start()
     {
         
@@ -24,6 +26,7 @@ public class GameManager : Singleton<GameManager>
         UIManager = GetComponent<UIManager>();
         DontDestroyOnLoad(gameObject);
         player = FindAnyObjectByType<PlayerController>();
+        currency = GetComponent<CurrencyManager>();
     }
 
     // Update is called once per frame

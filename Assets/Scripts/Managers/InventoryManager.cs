@@ -34,6 +34,7 @@ public class InventoryManager : MonoBehaviour
         if (inventoryByName.ContainsKey(inventoryName))
         {
             inventoryByName[inventoryName].AddItemInventory(item);
+            GameManager.Instance.UIManager.RefreshAll();
         }
     }
 }
